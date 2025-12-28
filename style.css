@@ -1,194 +1,144 @@
-/* GLOBAL SETTINGS */
-:root {
-    --bg-color: #050505;
-    --text-color: #e0e0e0;
-    --accent-color: #00ffff; /* Cyan for Creation */
-    --accent-secondary: #ff00ff; /* Magenta for Curiosity */
-    --font-serif: "Times New Roman", serif;
-    --font-mono: "Courier New", monospace;
-    --font-sans: "Helvetica Neue", sans-serif;
+/* --- CV PAGE STYLES --- */
+
+.cv-container {
+    max-width: 800px;
+    margin: 4rem auto;
+    padding: 2rem;
+    background-color: #0a0a0a;
+    border: 1px solid #222;
+    box-shadow: 0 0 20px rgba(0,0,0,0.5);
 }
 
-* { margin: 0; padding: 0; box-sizing: border-box; }
-
-body {
-    background-color: var(--bg-color);
-    color: var(--text-color);
-    font-family: var(--font-sans);
-    overflow-x: hidden;
-}
-
-/* --- HOME PAGE STYLES --- */
-.home-body { height: 100vh; overflow: hidden; }
-
-#constellationCanvas {
-    position: absolute;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
-    z-index: 1;
-}
-
-.interface-layer {
-    position: relative;
-    z-index: 2;
-    pointer-events: none; /* Let clicks pass through to canvas */
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-}
-
-.main-header {
-    position: absolute;
-    top: 2rem;
-    width: 90%;
+.cv-header {
     display: flex;
     justify-content: space-between;
-    pointer-events: auto;
+    align-items: flex-start;
+    border-bottom: 2px solid var(--accent-color);
+    padding-bottom: 2rem;
+    margin-bottom: 2rem;
 }
 
-.main-header a {
-    color: var(--text-color);
+.cv-name {
+    font-family: var(--font-sans);
+    font-size: 2.5rem;
+    text-transform: uppercase;
+    font-weight: 800;
+    color: #fff;
+}
+
+.cv-title {
+    font-family: var(--font-serif);
+    font-style: italic;
+    color: #888;
+    margin-bottom: 1rem;
+}
+
+.cv-contact {
+    font-family: var(--font-mono);
+    font-size: 0.9rem;
+    color: #aaa;
+    display: flex;
+    gap: 1.5rem;
+}
+
+.cv-contact i { color: var(--accent-color); margin-right: 5px; }
+
+.btn-download {
+    background: transparent;
+    border: 1px solid var(--accent-color);
+    color: var(--accent-color);
+    padding: 0.8rem 1.5rem;
     text-decoration: none;
     font-family: var(--font-mono);
-    margin-left: 2rem;
-    opacity: 0.7;
+    font-size: 0.8rem;
+    transition: all 0.3s ease;
+    display: inline-block;
 }
 
-.center-gravity {
-    text-align: center;
-    pointer-events: none;
+.btn-download:hover {
+    background: var(--accent-color);
+    color: #000;
 }
 
-.motto {
+.cv-section { margin-bottom: 3rem; }
+
+.cv-heading {
     font-family: var(--font-mono);
-    font-size: 1.5rem;
-    letter-spacing: 0.3rem;
-    margin-bottom: 1rem;
+    font-size: 1.1rem;
+    color: var(--accent-secondary); /* Magenta for sections */
     text-transform: uppercase;
+    letter-spacing: 2px;
+    border-bottom: 1px solid #333;
+    padding-bottom: 0.5rem;
+    margin-bottom: 1.5rem;
 }
 
-.sub-motto {
-    font-family: var(--font-serif);
-    font-style: italic;
-    opacity: 0.6;
-}
+.cv-item { margin-bottom: 2rem; }
 
-.instruction {
-    margin-top: 2rem;
-    font-family: var(--font-mono);
-    font-size: 0.7rem;
-    opacity: 0.4;
-}
-
-/* --- PROJECT PAGE (VISUAL JOURNAL) STYLES --- */
-.project-container {
-    max-width: 900px;
-    margin: 0 auto;
-    padding-bottom: 5rem;
-}
-
-.hero-section {
-    height: 60vh;
-    background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.9)), 
-                url('https://upload.wikimedia.org/wikipedia/commons/thumb/6/6f/Dilution_refrigerator_inside.jpg/1200px-Dilution_refrigerator_inside.jpg'); /* Placeholder Image */
-    background-size: cover;
-    background-position: center;
+.cv-item-header {
     display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-    padding: 4rem;
-    margin-bottom: 4rem;
+    justify-content: space-between;
+    margin-bottom: 0.3rem;
 }
 
-.project-title {
+.cv-item-header h3 {
     font-family: var(--font-sans);
-    font-size: 3.5rem;
-    font-weight: 800;
-    text-transform: uppercase;
-    line-height: 1;
-    margin-bottom: 1rem;
+    font-size: 1.1rem;
+    color: #e0e0e0;
 }
 
-.project-subtitle {
+.cv-date {
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    color: #666;
+}
+
+.cv-role {
     font-family: var(--font-serif);
-    font-size: 1.5rem;
     font-style: italic;
+    color: #aaa;
+    margin-bottom: 0.5rem;
+}
+
+.cv-detail {
+    font-size: 0.9rem;
+    color: #888;
+}
+
+.cv-list {
+    list-style-type: none;
+    padding-left: 0;
+}
+
+.cv-list li {
+    position: relative;
+    padding-left: 1.5rem;
+    margin-bottom: 0.5rem;
+    font-family: var(--font-sans);
+    font-size: 0.95rem;
+    color: #ccc;
+    line-height: 1.5;
+}
+
+.cv-list li::before {
+    content: "▹";
+    position: absolute;
+    left: 0;
     color: var(--accent-color);
 }
 
-.storyboard-strip {
-    display: flex;
-    gap: 10px;
-    margin-bottom: 4rem;
-    overflow-x: auto;
-    padding: 0 2rem;
-}
-
-.sb-panel {
-    min-width: 200px;
-    height: 150px;
-    background: #1a1a1a;
-    border: 1px solid #333;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-}
-
-.sb-caption { font-family: var(--font-mono); font-size: 0.7rem; margin-top: 10px; color: #888; }
-
-.journal-section {
+.cv-skills-grid {
     display: grid;
-    grid-template-columns: 1fr 2fr;
-    gap: 3rem;
-    padding: 2rem;
-    border-top: 1px solid #222;
-}
-
-.section-header {
-    font-family: var(--font-mono);
-    font-size: 0.9rem;
-    color: #666;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-}
-
-.section-content {
-    font-family: var(--font-serif);
-    font-size: 1.2rem;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    font-family: var(--font-sans);
+    font-size: 0.95rem;
     line-height: 1.6;
     color: #ccc;
 }
 
-.tech-stack {
-    display: flex;
-    gap: 1rem;
-    margin-top: 2rem;
-}
-
-.tech-tag {
-    border: 1px solid var(--accent-color);
-    color: var(--accent-color);
-    padding: 0.3rem 0.8rem;
-    font-family: var(--font-mono);
-    font-size: 0.8rem;
-}
-
-.deviation-block {
-    background: #111;
-    padding: 2rem;
-    border-left: 3px solid var(--accent-secondary);
-    font-family: var(--font-mono);
-    margin-top: 2rem;
-}
-
-.back-link {
-    position: fixed;
-    top: 2rem; left: 2rem;
-    color: white;
-    text-decoration: none;
-    font-family: var(--font-mono);
-    z-index: 10;
+/* Responsive adjust for CV */
+@media (max-width: 600px) {
+    .cv-header { flex-direction: column; gap: 1rem; }
+    .cv-skills-grid { grid-template-columns: 1fr; }
 }
