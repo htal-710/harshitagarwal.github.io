@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NIST Project | The Sub-Kelvin Polarization</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <a href="index.html" class="back-link">← RETURN TO MAP</a>
+
+    <div class="project-container">
+        
+        <div class="hero-section">
+            <h1 class="project-title">The Sub-Kelvin<br>Polarization</h1>
+            <p class="project-subtitle">Designing a fully cryogenic eye to observe the oldest light in the universe.</p>
+        </div>
+
+        <div class="storyboard-strip">
+            <div class="sb-panel">
+                <div style="font-size:2rem;">🌌</div>
+                <div class="sb-caption">THE CMB</div>
+            </div>
+            <div class="sb-panel">
+                <div style="font-size:2rem;">👁️</div>
+                <div class="sb-caption">MKID SENSORS</div>
+            </div>
+            <div class="sb-panel">
+                <div style="font-size:2rem;">⚛️</div>
+                <div class="sb-caption">QUANTUM INTERACTION</div>
+            </div>
+            <div class="sb-panel">
+                <div style="font-size:2rem;">🔭</div>
+                <div class="sb-caption">TELESCOPE ARRAY</div>
+            </div>
+        </div>
+
+        <div class="journal-section">
+            <div class="section-header">01. THE INQUIRY</div>
+            <div class="section-content">
+                <p>To map the Cosmic Microwave Background (CMB), we use superconducting sensors (MKIDs) that operate near absolute zero. But there was a problem.</p>
+                <br>
+                <p><strong>The Hypothesis:</strong> In the previous paradigm, calibration light was coupled from outside the cryostat, introducing unknown errors. I proposed that moving the entire calibration assembly—source, filters, and motion—<i>inside</i> the dilution refrigerator would eliminate these errors.</p>
+            </div>
+        </div>
+
+        <div class="journal-section">
+            <div class="section-header">02. THE BUILD</div>
+            <div class="section-content">
+                <p>Standard mechanics freeze at 4 Kelvin. I engineered a custom <strong>Cryogenic Rotary System</strong> anchored to the 4K stage.</p>
+                <br>
+                <p>I utilized <strong>SolidWorks</strong> to design a mount for a UHV stepper motor and <strong>Finite Element Analysis</strong> to model thermal loads. The system was automated using <strong>Python</strong> scripts to sweep through polarization angles autonomously.</p>
+                
+                <div class="tech-stack">
+                    <span class="tech-tag">Cryogenics</span>
+                    <span class="tech-tag">SolidWorks</span>
+                    <span class="tech-tag">Python</span>
+                    <span class="tech-tag">FEA</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="journal-section">
+            <div class="section-header">03. FIELD NOTES</div>
+            <div class="section-content">
+                <div class="deviation-block">
+                    <p><strong>FAILURE LOG:</strong> The thermal battle.</p>
+                    <p>Initially, the cryostat failed to condense due to heat leak from the wiring harness. Later, the motor seized due to thermal contraction. We had to realign the drive rod and adjust thermalization to make it spin at 4K.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="journal-section">
+            <div class="section-header">04. VALIDATION</div>
+            <div class="section-content">
+                <p>The system worked. We successfully rotated the polarized source in-situ. The observed data matched simulations, allowing us to measure the Cross-Polarization Component with high precision.</p>
+            </div>
+        </div>
+
+    </div>
+
+</body>
+</html>
