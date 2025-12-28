@@ -5,6 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Harshit Agarwal | The Observer</title>
     <link rel="stylesheet" href="style.css">
+    <style>
+        /* Backup Styles in case style.css isn't loading */
+        body { background-color: #050505; color: #e0e0e0; margin: 0; overflow: hidden; }
+        #constellationCanvas { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; }
+        .interface-layer { position: relative; z-index: 2; pointer-events: none; height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; }
+        .main-header { position: absolute; top: 2rem; width: 90%; display: flex; justify-content: space-between; pointer-events: auto; }
+        .main-header a { color: #e0e0e0; text-decoration: none; font-family: monospace; margin-left: 2rem; }
+        .center-gravity { text-align: center; pointer-events: none; }
+        .motto { font-family: monospace; font-size: 1.5rem; letter-spacing: 0.3rem; margin-bottom: 1rem; text-transform: uppercase; }
+        .sub-motto { font-family: serif; font-style: italic; opacity: 0.6; }
+        .instruction { margin-top: 2rem; font-family: monospace; font-size: 0.7rem; opacity: 0.4; }
+    </style>
 </head>
 <body class="home-body">
 
@@ -27,6 +39,7 @@
     </div>
 
     <script>
+        // --- 1. THE DATA ---
         const UNIVERSE_DATA = {
             skills: [
                 { id: 'cryo', name: 'CRYOGENICS', size: 8, x: 0.3, y: 0.3 },
@@ -49,13 +62,130 @@
                     id: 'transmon', 
                     name: 'THE ARTIFICIAL ATOM', 
                     type: 'creation',
-                    url: '#', /* Placeholder until we build this page */
+                    url: '#', 
                     x: 0.6, y: 0.6,
                     links: ['fab', 'quant', 'design', 'cryo']
                 }
             ]
         };
+
+        // --- 2. THE PHYSICS ENGINE ---
+        const canvas = document.getElementById('constellationCanvas');
+        const ctx = canvas.getContext('2d');
+
+        let width, height;
+        const stars = [];
+        const planets = [];
+        const cursor = { x: 0, y: 0 };
+
+        function resize() {
+            width = canvas.width = window.innerWidth;
+            height = canvas.height = window.innerHeight;
+        }
+        window.addEventListener('resize', resize);
+        resize();
+
+        class Node {
+            constructor(data, type) {
+                this.data = data;
+                this.type = type; 
+                this.x = data.x * width;
+                this.y = data.y * height;
+                this.baseSize = data.size;
+                this.currentSize = data.size;
+                this.hovered = false;
+                this.vx = (Math.random() - 0.5) * 0.5;
+                this.vy = (Math.random() - 0.5) * 0.5;
+            }
+
+            update() {
+                this.x += this.vx;
+                this.y += this.vy;
+                if (this.x < 0 || this.x > width) this.vx *= -1;
+                if (this.y < 0 || this.y > height) this.vy *= -1;
+
+                const dist = Math.hypot(cursor.x - this.x, cursor.y - this.y);
+                if (dist < 30) {
+                    this.hovered = true;
+                    this.currentSize = this.baseSize * 1.5;
+                    document.body.style.cursor = 'pointer';
+                } else {
+                    this.hovered = false;
+                    this.currentSize = this.baseSize;
+                }
+            }
+
+            draw() {
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.currentSize, 0, Math.PI * 2);
+                if (this.type === 'skill') {
+                    ctx.fillStyle = 'white';
+                    ctx.shadowBlur = 10;
+                    ctx.shadowColor = 'white';
+                } else {
+                    ctx.fillStyle = '#00ffff'; 
+                    ctx.shadowBlur = 15;
+                    ctx.shadowColor = '#00ffff';
+                }
+                ctx.fill();
+                ctx.closePath();
+
+                ctx.fillStyle = 'rgba(255,255,255,0.7)';
+                ctx.font = '10px Courier New';
+                ctx.fillText(this.data.name, this.x + 15, this.y + 4);
+            }
+        }
+
+        function init() {
+            UNIVERSE_DATA.skills.forEach(skill => stars.push(new Node(skill, 'skill')));
+            UNIVERSE_DATA.projects.forEach(project => planets.push(new Node(project, 'project')));
+        }
+
+        function animate() {
+            ctx.clearRect(0, 0, width, height);
+
+            stars.forEach(star => {
+                star.update();
+                star.draw();
+            });
+
+            planets.forEach(planet => {
+                planet.update();
+                planet.draw();
+                if (planet.hovered) {
+                    planet.data.links.forEach(linkId => {
+                        const targetSkill = stars.find(s => s.data.id === linkId);
+                        if (targetSkill) {
+                            ctx.beginPath();
+                            ctx.moveTo(planet.x, planet.y);
+                            ctx.lineTo(targetSkill.x, targetSkill.y);
+                            ctx.strokeStyle = 'rgba(0, 255, 255, 0.4)';
+                            ctx.lineWidth = 1;
+                            ctx.stroke();
+                        }
+                    });
+                }
+            });
+            requestAnimationFrame(animate);
+        }
+
+        window.addEventListener('mousemove', (e) => {
+            cursor.x = e.clientX;
+            cursor.y = e.clientY;
+        });
+
+        window.addEventListener('click', (e) => {
+            planets.forEach(planet => {
+                const dist = Math.hypot(e.clientX - planet.x, e.clientY - planet.y);
+                if (dist < 30 && planet.data.url !== '#') {
+                    window.location.href = planet.data.url;
+                }
+            });
+        });
+
+        // Start the engine
+        init();
+        animate();
     </script>
-    <script src="constellation.js"></script>
 </body>
 </html>
