@@ -12,6 +12,8 @@
     --text-2: #5f6b58;
     --text-3: #8b9683;
     --border: #dde3d1;
+    --link: #3e6b8a;
+    --link-hover: #2e5470;
 }
 
 * { margin:0; padding:0; box-sizing:border-box; }
@@ -243,6 +245,19 @@ a { color: inherit; }
     font-family:'IBM Plex Mono', monospace; font-size:12px; color: var(--sage-deep);
     white-space:nowrap; text-align:right;
 }
+
+.pub-list-section{ margin-top:48px; padding-top:40px; border-top:1px solid var(--border); }
+.pub-list-heading{
+    font-family:'Fraunces', Georgia, serif; font-size:26px; color: var(--sage-deep-2);
+    margin-bottom:24px; line-height:1.3;
+}
+.pub-list{ list-style:decimal; padding-left:24px; display:flex; flex-direction:column; gap:20px; }
+.pub-list li{ font-size:15px; line-height:1.7; color: var(--text-2); }
+.pub-list li strong{ color: var(--text); font-weight:600; }
+.pub-list .venue{ color: var(--text-3); font-style:italic; }
+.pub-list .links{ display:block; margin-top:4px; font-family:'IBM Plex Mono', monospace; font-size:13px; }
+.pub-link{ color: var(--link); text-decoration:underline; font-weight:500; }
+.pub-link:hover{ color: var(--link-hover); }
 
 /* --- CV --- */
 .cv-container{ max-width:1000px; margin:48px auto 60px; padding:0 64px; }
